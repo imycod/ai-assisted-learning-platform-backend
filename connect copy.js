@@ -2,11 +2,11 @@
  * @Author: wuxs 317009160@qq.com
  * @Date: 2023-07-26 09:29:10
  * @LastEditors: wuxs 317009160@qq.com
- * @LastEditTime: 2023-07-26 13:19:59
+ * @LastEditTime: 2023-07-26 11:53:14
  * @FilePath: \pms-pcd:\studio\node-server\server-mongodb-base\models.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const mongodb = require('mongodb');
 
 const dotenv = require('dotenv')
 
@@ -22,6 +22,8 @@ const environment = confEnv.parsed.NODE_ENV
 
 const { database, host, port, dialect, cluster } = db[environment].databases
 
+const MongoClient = mongodb.MongoClient;
+const ServerApiVersion= mongodb.ServerApiVersion;
 
 let connectUrl = ''
 let connectOptions = {}
@@ -52,12 +54,10 @@ if (environment === 'production') {
 
 module.exports = async (app) => {
     try {
-        const client = new MongoClient(connectUrl, connectOptions);
+        const client = await MongoClient.connect(connectUrl, connectOptions);
 
-        await client.connect();
-        const db= await client.db(database)
-        db.command({ ping: 1 });
-        console.log("Pinged your deployment. You successfully connected to MongoDB!");
+        const db = client.db(database);
+
         // 在此处可以执行数据库操作，或将数据库实例传递给你的路由和中间件
         // 例如：将数据库实例作为本地变量传递给路由
         app.locals.db = db;
