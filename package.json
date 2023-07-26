@@ -6,7 +6,7 @@
     "start": "set NODE_ENV=production&&nodemon ./app.js",
     "start:dev": "set NODE_ENV=development&&nodemon ./app.js",
     "start:pro": "set NODE_ENV=production&&nodemon ./app.js",
-    "build": "node index.js"
+    "build": "node app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
