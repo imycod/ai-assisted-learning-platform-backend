@@ -2,6 +2,7 @@
   "name": "spider-search-proxy",
   "version": "0.0.0",
   "private": true,
+  "main": "app.js",
   "scripts": {
     "start": "set NODE_ENV=production&&nodemon ./app.js",
     "start:dev": "set NODE_ENV=development&&nodemon ./app.js",
@@ -9,6 +10,7 @@
     "build": "node app.js"
   },
   "dependencies": {
+    "@vercel/node": "^2.15.6",
     "bcryptjs": "^2.4.3",
     "cheerio": "^1.0.0-rc.12",
     "cookie-parser": "~1.4.4",
